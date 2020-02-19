@@ -1,0 +1,59 @@
+scalar Date
+
+
+#START DOMAIN
+type Domain{
+   _id: ID,
+   status: Boolean!,
+   host: String!,
+   created_at: Date!,
+   modified_at: Date!,
+   last_checked: Date!,
+   count_emails: Int!
+}
+input DomainInput {
+   host: String!
+}
+#END DOMAIN
+
+
+#START MAIL
+type Mail{
+    subject: String!,
+    received_at: Date!,
+    content: String!
+}
+#END MAIL
+
+
+#START EMAIL
+type Email{
+    _id: ID,
+    created_at: Date!,
+    remove_at: Date,
+    mails: [Mail]
+}
+#END EMAIL
+
+
+
+#START QUERIES
+type Query {
+  "Get a domain"
+  getDomain(id: ID!): Domain
+  "Get many domains"
+  getDomains: [Domain]
+}
+#END QUERIES
+
+
+
+#START MUTATIONS
+type Mutation {
+  "Create a domain"
+  createDomain(input: DomainInput!): Domain
+  # "Edita un curso"
+  # editCourse(input: CourseEditInput!): Course,
+
+}
+#END MUTATIONS
