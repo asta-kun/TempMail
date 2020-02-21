@@ -36,7 +36,7 @@ type Email{
     _id: ID,
     email: String!
     created_at: Date!
-    remove_at: Date
+    remove_at: Date!
     mails: [Mail]
 }
 

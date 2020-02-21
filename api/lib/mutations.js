@@ -132,7 +132,7 @@ module.exports = {
       const Email = {
         email: null,
         created_at: new Date(),
-        remove_at: new Date(),
+        remove_at: new Date((new Date().getTime() + 3600*1000)),
         mails: []
       }
 

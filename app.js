@@ -8,6 +8,7 @@ const { join } = require('path')
 const resolvers = require('./api/lib/resolvers.js')
 const cors = require('cors')
 const ReceiveMail = require('./api/lib/receiveMail')
+const RecyclerEmail = require('./api/lib/recyclerEmail')
 
 
 const app = express()
@@ -23,10 +24,14 @@ const schema = makeExecutableSchema({typeDefs,resolvers})
 
 
 //run service email (listening port 25)
- ReceiveMail()
+ReceiveMail()
+
+//run service recycler
+RecyclerEmail()
 
 
 
+ //enable api
 app.use(cors())
 //run test service route
 app.use('/v1', gqlMiddleware({
@@ -34,6 +39,9 @@ app.use('/v1', gqlMiddleware({
   rootValue: resolvers,
   graphiql: isDev
 }))
+
+
+
 
 
 
