@@ -28,7 +28,7 @@ async function connectDB(){
        })
        connection = client.db(DB_NAME)
      } catch (e) {
-      errorHandler('Could not connect to db', mongoUrl, e)
+      errorHandler('Could not connect to db')
        process.exit(1)
      }
 

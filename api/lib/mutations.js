@@ -55,6 +55,71 @@ module.exports = {
 
  
 
+  //add a new domain
+  editDomain: async (root, {domain_id, input}) => {
+
+
+    //default values
+    const defaults = {
+      modified_at: new Date()
+    }
+
+    //apply default values
+     input = Object.assign(defaults, input)
+
+    let db
+    let domain
+
+    //get db connection
+    db = await connectDb()
+
+    try {
+           //find the domain
+           domain = await db.collection('domain').findOne({
+             "_id":ObjectID(domain_id)
+           })
+     
+           //prevent not found domain
+           if ( !domain ){
+             errorHandler('Domain not found')
+           }
+  
+      } catch (e) {
+           errorHandler(e)
+      }
+
+
+    try {   
+         //try update
+        //set params
+         await db.collection('domain').updateOne({
+           "_id":ObjectID(domain_id)
+         }, {
+           "$set":input
+         })
+
+   
+         //get the modified domain
+         domain = await db.collection('domain').findOne({
+          "_id":ObjectID(domain_id)
+          })
+
+       } catch (e) {
+            errorHandler(e)
+       }
+
+
+      
+
+    //return a OK domain added
+    return domain
+  },
+
+ 
+
+
+
+
     //add a new Email
     createEmail: async (root, {domain_id}) => {
 
@@ -72,10 +137,26 @@ module.exports = {
         //get db connection
         db = await connectDb()
   
-        //get the domain
-        let domain = await db.collection('domain').findOne({"_id":ObjectID(domain_id)})
+        // get the domain
+        // let domain = await db.collection('domain').findOne({"_id":ObjectID(domain_id)})
+
+        //get count of valid domains
+        let domain_count = await db.collection('domain').find({"status":true}).count()
+
+        //prevent when domain_count is 0
+        if(domain_count == 0){
+          errorHandler('Don\'t have a valid domains')
+        }
+
+
+        //generate a random skip
+        let random_skip = Math.floor(Math.random() * Math.floor(domain_count))
+
+        //get a domain
+        let domain = await db.collection('domain').skip(random_skip).findOne({"status":true})
 
         Email.email = generateName(domain.host)
+
   
 
   
