@@ -23,6 +23,7 @@ input DomainUpdateInput {
 #START MAIL
 type Mail{
     subject: String!
+    from: String!
     received_at: Date!
     content: String!
 }

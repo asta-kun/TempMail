@@ -137,25 +137,19 @@ module.exports = {
         //get db connection
         db = await connectDb()
   
-        // get the domain
-        // let domain = await db.collection('domain').findOne({"_id":ObjectID(domain_id)})
 
         //get count of valid domains
         let domain_count = await db.collection('domain').find({"status":true}).count()
 
-        //prevent when domain_count is 0
-        if(domain_count == 0){
-          errorHandler('Don\'t have a valid domains')
-        }
-
+        //prevent error when domain_count is 0
+        if(domain_count == 0) errorHandler('Don\'t have a valid domains')
 
         //generate a random skip
         let random_skip = Math.floor(Math.random() * Math.floor(domain_count))
 
         //get a domain
-        let domain = await db.collection('domain').skip(random_skip).findOne({"status":true})
-
-        Email.email = generateName(domain.host)
+        let domain = await db.collection('domain').find({"status":true}).skip(random_skip).limit(1).toArray()
+        Email.email = generateName(domain[0].host)//get the first
 
   
 

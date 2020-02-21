@@ -7,6 +7,7 @@ const { readFileSync } = require('fs')
 const { join } = require('path')
 const resolvers = require('./api/lib/resolvers.js')
 const cors = require('cors')
+const ReceiveMail = require('./api/lib/receiveMail')
 
 
 const app = express()
@@ -19,6 +20,10 @@ const typeDefs = readFileSync(
   'utf-8'
 )
 const schema = makeExecutableSchema({typeDefs,resolvers})
+
+
+//run service email (listening port 25)
+ ReceiveMail()
 
 
 

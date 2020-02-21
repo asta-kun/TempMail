@@ -28,6 +28,7 @@
     "express-graphql": "^0.9.0",
     "graphql": "^14.6.0",
     "graphql-tools": "^4.0.6",
+    "mailin": "^3.0.4",
     "mongo": "^0.1.0"
   },
   "devDependencies": {
