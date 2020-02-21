@@ -28,8 +28,11 @@
     "express-graphql": "^0.9.0",
     "graphql": "^14.6.0",
     "graphql-tools": "^4.0.6",
+    "graphql-yoga": "^1.18.3",
+    "is-valid-domain": "0.0.11",
     "mailin": "^3.0.4",
-    "mongo": "^0.1.0"
+    "mongo": "^0.1.0",
+    "yup": "^0.28.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.2",

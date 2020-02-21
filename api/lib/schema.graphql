@@ -1,11 +1,12 @@
 scalar Date
+directive @length(min: Int, max: Int) on FIELD_DEFINITION
 
 
 #START DOMAIN
 type Domain{
    _id: ID
    status: Boolean!
-   host: String!
+   host: String! @length(min: 3, max: 150)
    created_at: Date!
    modified_at: Date!
    last_checked: Date!
@@ -66,7 +67,7 @@ type Mutation {
 
 
   "Create a Email"
-  createEmail(domain_id: ID!): Email
+  createEmail: Email
 
 }
 #END MUTATIONS

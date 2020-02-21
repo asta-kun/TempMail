@@ -35,6 +35,9 @@ app.use('/v1', gqlMiddleware({
   graphiql: isDev
 }))
 
+
+
+
 //run server
 app.listen(port, () => {
   console.log(`Server is listening at http://localhost:${port}/v1`)

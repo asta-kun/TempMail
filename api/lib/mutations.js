@@ -3,13 +3,18 @@ const generateName = require('./utils/Email/generateName')
 const connectDb = require('./db')
 const {ObjectID} = require('mongodb')
 const { errorHandler } = require('./errorHandler')
-
+const isValidDomain = require('is-valid-domain')
 
 module.exports = {
 
 
   //add a new domain
   createDomain: async (root, {input}) => {
+    
+    //validate host
+    if(!isValidDomain(input.host, {
+      subdomain: false, wildcard: false
+    })) errorHandler('invalid domain')
 
     //default values
     const defaults = {
@@ -31,11 +36,11 @@ module.exports = {
       db = await connectDb()
 
       //find duplicate domains
-      let duplicated = await db.collection('domain').find({
+      let duplicated = await db.collection('domain').findOne({
         "host":{
           "$eq":newDomain.host
         }
-      }).count()
+      })
 
       //prevent duplicate domains
       if ( duplicated ){
@@ -121,7 +126,7 @@ module.exports = {
 
 
     //add a new Email
-    createEmail: async (root, {domain_id}) => {
+    createEmail: async () => {
 
       //Email
       const Email = {
