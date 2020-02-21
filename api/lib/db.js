@@ -1,6 +1,8 @@
 'use strict'
 
 const { MongoClient } = require('mongodb')
+const { errorHandler } = require('./errorHandler')
+
 require('dotenv').config()
 
 const {
@@ -26,7 +28,7 @@ async function connectDB(){
        })
        connection = client.db(DB_NAME)
      } catch (e) {
-       console.error('Could not connect to db', mongoUrl, e)
+      errorHandler('Could not connect to db', mongoUrl, e)
        process.exit(1)
      }
 

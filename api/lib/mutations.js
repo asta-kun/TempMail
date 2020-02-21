@@ -2,6 +2,7 @@
 const generateName = require('./utils/Email/generateName')
 const connectDb = require('./db')
 const {ObjectID} = require('mongodb')
+const { errorHandler } = require('./errorHandler')
 
 
 module.exports = {
@@ -38,15 +39,14 @@ module.exports = {
 
       //prevent duplicate domains
       if ( duplicated ){
-        console.error('Duplicated domain')
-        return null;
+        errorHandler('Duplicated domain')
       }
 
       //add new domain
       domain = await db.collection('domain').insertOne(newDomain)
       newDomain._id = domain.insertedId//add the generated id
     } catch (e) {
-      console.error(e)
+      errorHandler(e)
     }
 
     //return a OK domain added
@@ -83,7 +83,7 @@ module.exports = {
         let newEmail = await db.collection('email').insertOne(Email)
         Email._id = newEmail.insertedId//add the generated id
       } catch (e) {
-        console.error(e)
+        errorHandler(e)
       }
   
       //return a OK Email added

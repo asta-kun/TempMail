@@ -45,6 +45,9 @@ type Query {
   getDomain(id: ID!): Domain
   "Get many domains"
   getDomains: [Domain]
+
+  "Get an Email"
+  getEmail(id: ID!): Email
 }
 #END QUERIES
 
