@@ -42,7 +42,7 @@ const DNSCheckerDomain = async () => {
                     "$lt":new Date((new Date().getTime() - 60*15*1000))//valid for 15 minutes
                 },
                 "created_at":{
-                    "$lt":new Date((new Date().getTime() - 3600*1000))//1 hour for new dns
+                    "$lt":new Date((new Date().getTime() - 60*15*1000))//15 minutes for new dns
                 }
               })
 
@@ -74,7 +74,7 @@ const DNSCheckerDomain = async () => {
                       }
 
                       //check the records is the same
-                      if (addresses[0].exchange != process.env.MX_RECORD || addresses[0].priority > 1) {
+                      if (addresses[0].exchange != process.env.MX_RECORD) {
                         await deleteDomain(domain._id)
                         resolve()
                         return true;

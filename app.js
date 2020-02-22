@@ -13,7 +13,7 @@ const DNSCheckerDomain = require('./api/lib/DNSCheckerDomain')
 
 
 const app = express()
-const port = process.env.port || 3000
+const port = process.env.APP_PORT || 3000
 const isDev = process.env.NODE_ENV !== 'production'
 
 // initial schema
