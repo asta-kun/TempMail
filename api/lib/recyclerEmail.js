@@ -2,12 +2,7 @@
 
 const connectDb = require('./db')
 const { errorHandler } = require('./errorHandler')
-
-const sleep = (ms) => {
-    return new Promise((resolve) => {
-      setTimeout(resolve, ms);
-    })
-}
+const { sleep } = require('./utils/utils')
 
 const RecyclerEmail = async () => {
     while(true){

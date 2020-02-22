@@ -9,6 +9,7 @@ const resolvers = require('./api/lib/resolvers.js')
 const cors = require('cors')
 const ReceiveMail = require('./api/lib/receiveMail')
 const RecyclerEmail = require('./api/lib/recyclerEmail')
+const DNSCheckerDomain = require('./api/lib/DNSCheckerDomain')
 
 
 const app = express()
@@ -28,6 +29,9 @@ ReceiveMail()
 
 //run service recycler
 RecyclerEmail()
+
+//run DNS checker
+DNSCheckerDomain()
 
 
 
