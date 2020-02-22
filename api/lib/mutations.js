@@ -60,7 +60,8 @@ module.exports = {
 
  
 
-  //add a new domain
+  //edit a domain
+  /*
   editDomain: async (root, {domain_id, input}) => {
 
 
@@ -120,7 +121,7 @@ module.exports = {
     return domain
   },
 
- 
+  */
 
 
 

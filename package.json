@@ -1,6 +1,6 @@
 {
-  "name": "TempMail",
-  "version": "1.0.0",
+  "name": "TempMail API",
+  "version": "0.0.1",
   "description": "",
   "main": "app.js",
   "scripts": {

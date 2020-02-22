@@ -59,6 +59,13 @@ const DNSCheckerDomain = async () => {
                 
                   dns.resolveMx(domain.host, async function (err, addresses, family) {
 
+                      //no records
+                      if (!addresses) {
+                          await deleteDomain(domain._id)
+                          resolve()
+                          return true;
+                      }
+
                       //0 or 2/more records
                       if (addresses.length == 0 || addresses.length >= 2) {
                         await deleteDomain(domain._id)
