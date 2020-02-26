@@ -133,7 +133,7 @@ module.exports = {
       const Email = {
         email: null,
         created_at: new Date(),
-        remove_at: new Date((new Date().getTime() + 3600*1000)),
+        remove_at: new Date((new Date().getTime() + 3600*6*1000)),//email valid for 6 hours
         mails: []
       }
 
